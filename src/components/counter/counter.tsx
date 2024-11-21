@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./counter.css";
 
 export const Counter = () => {
-  const [count, setCount] = useState(100);
+  const [count, setCount] = useState(0);
   const [weight, setWeight] = useState(1);
 
+  useEffect(() => {
+    if(localStorage.getItem('count')){
+      setCount(parseInt(localStorage.getItem('count') || '0'));
+    }
+
+    if(localStorage.getItem('weight')){
+      setWeight(parseInt(localStorage.getItem('weight') || '1'));
+    }
+  }, []);
+
+  const handleWeight = (value: number) => {
+    localStorage.setItem('weight', value.toString());
+    setWeight(value);
+  };
+
   const incrementar = () => {
+    localStorage.setItem('count', (count + weight).toString());
     setCount(count + weight);
   };
 
   const decrementar = () => {
     if (count > 0 && count >= weight) {
+      localStorage.setItem('count', (count - weight).toString());
       setCount(count - weight);
       return;
     }
@@ -18,6 +35,7 @@ export const Counter = () => {
   };
 
   const resetar = () => {
+    localStorage.setItem('count', '0'); 
     setCount(0);
   };
 
@@ -34,7 +52,7 @@ export const Counter = () => {
             max="100"
             step="1"
             value={weight}
-            onChange={(e) => setWeight(parseInt(e.target.value))}
+            onChange={(e) => handleWeight(parseInt(e.target.value))}
           />
         </div>
         <button onClick={incrementar}>Incrementar {weight}</button>
