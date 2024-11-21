@@ -9,4 +9,5 @@
 
 - ```Botão de resetar:``` Botão que reinicia o contador para 0.
 
-## <a href="">Deploy</a>
+## <a href="https://mats057.github.io/desafio-linktou/">Clique aqui para ver o Deploy</a>
+<a href="https://mats057.github.io/desafio-linktou/"><img src="./public/deploy.png" alt="Imagem de deploy do app"></a>
